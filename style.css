@@ -1,0 +1,92 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --navy: #0F172A;
+    --blue: #2563EB;
+    --green: #10B981;
+    --white: #FFFFFF;
+    --gray-light: #F1F5F9;
+    --gray-mid: #64748B;
+    --gray-border: #E2E8F0;
+    --red: #EF4444;
+    --shadow: 0 10px 30px rgba(15,23,42,.08);
+    --radius: 12px;
+    --font: 'Inter', sans-serif;
+}
+
+body { font-family: var(--font); color: var(--navy); background: var(--white); line-height: 1.6; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+.container { width: min(1150px, 92%); margin-inline: auto; }
+
+/* HEADER */
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gray-border); padding: 1rem 0; }
+.header-inner { display: flex; align-items: center; gap: 2rem; }
+.logo { display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.2rem; }
+.logo-icon { background: linear-gradient(135deg, var(--blue), var(--navy)); color: #fff; width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; font-size: .9rem; }
+.logo-text strong { color: var(--blue); }
+.main-nav { display: flex; gap: 1.5rem; margin-left: auto; font-weight: 500; color: var(--gray-mid); }
+.main-nav a:hover { color: var(--navy); }
+.btn { display: inline-block; padding: .7rem 1.5rem; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; transition: .2s; text-align: center; }
+.btn-primary { background: var(--blue); color: #fff; box-shadow: 0 4px 12px rgba(37,99,235,.3); }
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+.btn-xl { width: 100%; padding: 1.1rem; font-size: 1.1rem; }
+
+/* HERO */
+.hero { background: radial-gradient(circle at 50% 0%, rgba(37,99,235,.1), transparent 60%); padding: 5rem 0; text-align: center; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 1rem; }
+.gradient-text { background: linear-gradient(90deg, var(--blue), var(--green)); -webkit-background-clip: text; color: transparent; }
+.hero-subtitle { color: var(--gray-mid); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+
+/* SECTIONS */
+.section { padding: 4rem 0; }
+.section-title { text-align: center; font-size: 2rem; font-weight: 800; margin-bottom: .5rem; }
+.section-subtitle { text-align: center; color: var(--gray-mid); margin-bottom: 2.5rem; }
+
+/* TICKETS GRID */
+.tickets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; }
+.ticket-card { background: #fff; border: 1px solid var(--gray-border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: .25s; box-shadow: 0 4px 6px rgba(0,0,0,.02); }
+.ticket-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--blue); }
+.ticket-card.selected { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.2); transform: translateY(-4px); position: relative; }
+.ticket-card.selected::after { content: '✓ Selezionato'; position: absolute; top: 10px; right: 10px; background: var(--green); color: #fff; font-size: .7rem; font-weight: bold; padding: .2rem .5rem; border-radius: 20px; }
+.ticket-card img { width: 100%; height: 110px; object-fit: cover; }
+.ticket-card h3 { padding: 1rem; text-align: center; font-size: .95rem; font-weight: 600; }
+
+/* FORMULAIRE */
+.form-section { background: var(--gray-light); }
+.form-wrapper { max-width: 800px; margin: 0 auto; background: #fff; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow); }
+.form-section-group { border: 1px solid var(--gray-border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.form-section-group legend { font-weight: 700; padding: 0 .5rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: .4rem; }
+.form-group label { font-size: .9rem; font-weight: 600; }
+.form-group input, .form-group select { padding: .8rem; border: 1px solid var(--gray-border); border-radius: 8px; font-family: inherit; font-size: 1rem; outline: none; transition: .2s; }
+.form-group input:focus, .form-group select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+.form-group input.invalid, .form-group select.invalid { border-color: var(--red); }
+.error-msg { color: var(--red); font-size: .8rem; min-height: 1rem; }
+.checkbox-group { margin-top: 1rem; flex-direction: row; align-items: flex-start; gap: .6rem; }
+.checkbox-label { display: flex; gap: .6rem; font-size: .9rem; cursor: pointer; font-weight: 400; }
+.checkbox-label input { width: 18px; height: 18px; margin-top: 2px; }
+.security-note { font-size: .85rem; background: #FFFBEB; color: #92400E; padding: .8rem; border-radius: 8px; border: 1px solid #FDE68A; margin-top: 1rem; }
+.submit-group { border: none; padding: 0; text-align: center; }
+
+/* PROGRESS BAR */
+.progress-container { margin-top: 1.5rem; background: var(--gray-border); border-radius: 20px; height: 12px; position: relative; overflow: hidden; }
+.progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--blue), var(--green)); transition: width .3s; }
+.progress-label { position: absolute; right: 0; top: 20px; font-size: .85rem; font-weight: bold; color: var(--gray-mid); }
+
+/* SUCCÈS */
+.success-message { text-align: center; padding: 3rem; background: #ECFDF5; border: 1px solid var(--green); border-radius: var(--radius); }
+.success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.success-message h3 { color: #065F46; font-size: 1.5rem; margin-bottom: .5rem; }
+
+/* FOOTER */
+.site-footer { background: var(--navy); color: var(--gray-mid); padding: 2rem 0; text-align: center; font-size: .9rem; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .main-nav, .header-cta { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-wrapper { padding: 1.5rem; }
+    .tickets-grid { grid-template-columns: repeat(2, 1fr); }
+}
